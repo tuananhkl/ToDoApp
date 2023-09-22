@@ -45,9 +45,10 @@ public class TodoListController : ControllerBase
             Name = request.Name,
             Description = request.Description,
             CreatedTime = DateTime.Now,
-            Completed = false
+            Completed = false,
+            DueTime = request.DueTime
         };
-
+        
         await _dbContext.Tasks.AddAsync(task);
         await _dbContext.SaveChangesAsync();
 

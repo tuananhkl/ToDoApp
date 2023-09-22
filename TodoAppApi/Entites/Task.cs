@@ -7,4 +7,5 @@ public class Task
     public string Description { get; set; } = null!;
     public DateTime CreatedTime { get; set; }
     public bool Completed { get; set; }
+    public DateTime? DueTime { get; set; }
 }
