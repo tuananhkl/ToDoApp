@@ -1,4 +1,4 @@
-namespace TodoAppApi.Entites;
+namespace TodoAppApi.Entities;
 
 public class Task
 {

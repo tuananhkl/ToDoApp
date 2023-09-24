@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj": {}
+    "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj": {
+    "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj",
+        "projectUniqueName": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj",
         "projectName": "TodoAppApi",
-        "projectPath": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj",
-        "packagesPath": "C:\\Users\\anh.nguyen50\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\obj\\",
+        "projectPath": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj",
+        "packagesPath": "/Users/thn/.nuget/packages/",
+        "outputPath": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\anh.nguyen50\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/thn/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,8 +67,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -85,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.200/RuntimeIdentifierGraph.json"
         }
       }
     }

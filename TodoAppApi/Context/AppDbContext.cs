@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Task = TodoAppApi.Entites.Task;
+using Task = TodoAppApi.Entities.Task;
 
 namespace TodoAppApi.Context;
 

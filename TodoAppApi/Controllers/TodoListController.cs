@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoAppApi.Context;
 using TodoAppApi.Dtos;
-using Task = TodoAppApi.Entites.Task;
+using Task = TodoAppApi.Entities.Task;
 
 namespace TodoAppApi.Controllers;
 
