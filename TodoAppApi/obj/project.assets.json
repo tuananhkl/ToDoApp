@@ -2257,24 +2257,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/thn/.nuget/packages/": {}
+    "C:\\Users\\anh.nguyen50\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj",
+      "projectUniqueName": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj",
       "projectName": "TodoAppApi",
-      "projectPath": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/TodoAppApi.csproj",
-      "packagesPath": "/Users/thn/.nuget/packages/",
-      "outputPath": "/Users/thn/Documents/Rider/TodoApp/TodoAppApi/obj/",
+      "projectPath": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\TodoAppApi.csproj",
+      "packagesPath": "C:\\Users\\anh.nguyen50\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anh.nguyen50\\Documents\\Rider\\SmallProjects\\TodoAppApi\\TodoAppApi\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/thn/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\anh.nguyen50\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2322,7 +2328,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -2334,7 +2341,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
