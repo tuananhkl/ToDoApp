@@ -1,28 +1,18 @@
-﻿# Use the official .NET SDK image as a build stage.
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS build
-
-# Set the working directory to /app
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 
-# Copy the source code to the container
-COPY ./TodoAppApi /app
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["TodoAppApi/TodoAppApi.csproj", "TodoAppApi/"]
+RUN dotnet restore "TodoAppApi/TodoAppApi.csproj"
+COPY . .
+WORKDIR "/src/TodoAppApi"
+RUN dotnet build "TodoAppApi.csproj" -c Release -o /app/build
 
-# Build the application
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "TodoAppApi.csproj" -c Release -o /app/publish
 
-# Use the official runtime image for the final image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
-
-# Set the working directory to /app
+FROM base AS final
 WORKDIR /app
-
-# Copy the published app from the build stage
-COPY --from=build /app/out .
-
-# Expose a port (change this if your app listens on a different port)
-#EXPOSE 80
-
-# Define the command to run your application
-CMD ["./TodoAppApi"]
-
-# Note: Make sure to replace "TodoAppApi" with the actual name of your API project's output executable.
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "TodoAppApi.dll"]
