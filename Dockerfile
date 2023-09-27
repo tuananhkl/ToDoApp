@@ -1,19 +1,28 @@
-﻿# https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /source
+﻿# Use the official .NET SDK image as a build stage.
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS build
 
-# copy csproj and restore as distinct layers
-COPY *.sln .
-COPY aspnetapp/*.csproj ./aspnetapp/
-RUN dotnet restore
-
-# copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /source/aspnetapp
-RUN dotnet publish -c release -o /app --no-restore
-
-# final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Set the working directory to /app
 WORKDIR /app
-COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+
+# Copy the source code to the container
+COPY ./TodoAppApi /app
+
+# Build the application
+RUN dotnet publish -c Release -o out
+
+# Use the official runtime image for the final image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the published app from the build stage
+COPY --from=build /app/out .
+
+# Expose a port (change this if your app listens on a different port)
+#EXPOSE 80
+
+# Define the command to run your application
+CMD ["./TodoAppApi"]
+
+# Note: Make sure to replace "TodoAppApi" with the actual name of your API project's output executable.
