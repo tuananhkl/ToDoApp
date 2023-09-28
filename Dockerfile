@@ -2,7 +2,7 @@
 WORKDIR /app
 
 #COPY *.csproj ./
-COPY ./TodoAppApi/*.csproj ./TodoAppApi/
+COPY ./TodoAppApi/TodoAppApi.csproj ./TodoAppApi/
 RUN dotnet restore
 
 COPY . ./
