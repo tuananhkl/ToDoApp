@@ -4,7 +4,7 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@2.4.0
-  win: circleci/windows@5.0
+#  win: circleci/windows@5.0
   
 
 # Define a job to be invoked later in a workflow.
@@ -12,7 +12,7 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: todoapp-docker
+      DOCKER_IMAGE: derrick/todoapp-docker
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
