@@ -22,7 +22,7 @@ jobs:
           docker-username: DOCKER_USERNAME
           docker-password: DOCKER_PASSWORD
       - docker/build:
-          path: ./TodoAppApi/
+          path: .
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
       - docker/push:
