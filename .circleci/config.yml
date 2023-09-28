@@ -12,7 +12,7 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: derrick/todoapp-docker
+      DOCKER_IMAGE: todoapp-docker
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
