@@ -39,8 +39,8 @@ workflows:
   my-pipeline:
     jobs:
       - build-and-push:
-        filters:
-          branches:
-            only:
-              - main
+          filters:
+            branches:
+              only:
+                - main
           
