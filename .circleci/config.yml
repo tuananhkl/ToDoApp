@@ -13,7 +13,7 @@ jobs:
   build-and-push:
     environment:
       DOCKER_IMAGE: tuananhpro/todoapp-docker
-      DOCKER_TAG: latest
+      DOCKER_TAG: arm64
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -33,6 +33,10 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
+#  deploy:
+#    executor: docker/docker
+#    steps:
+#      - run:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
