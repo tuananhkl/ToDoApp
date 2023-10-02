@@ -15,9 +15,10 @@ jobs:
       DOCKER_IMAGE: tuananhpro/todoapp-docker
       DOCKER_TAG: arm64
     executor: docker/docker
+    resource_class: arm.medium
     steps:
       - setup_remote_docker:
-          platform: linux-arm64
+          resource_class: arm.medium
       - checkout
       - docker/check:
           docker-username: DOCKER_USERNAME
