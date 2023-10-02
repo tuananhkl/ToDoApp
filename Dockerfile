@@ -6,9 +6,9 @@ COPY TodoAppApi/TodoAppApi.csproj ./
 RUN dotnet restore
 
 # Set the target architecture to ARM64
-ENV DOTNET_ROOT=/usr/share/dotnet-arm64
+#ENV DOTNET_ROOT=/usr/share/dotnet-arm64
 COPY . ./
-RUN dotnet publish -c Release -o out -r linux-arm64
+RUN dotnet publish -c Release -o out --arch arm64
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
