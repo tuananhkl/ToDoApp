@@ -33,10 +33,10 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
-  deploy:
-    executor: docker/docker
-    steps:
-      - run:
+#  deploy:
+#    executor: docker/docker
+#    steps:
+#      - run:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
