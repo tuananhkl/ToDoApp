@@ -16,7 +16,8 @@ jobs:
       DOCKER_TAG: arm64
     executor: docker/docker
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
+          platform: linux-arm64
       - checkout
       - docker/check:
           docker-username: DOCKER_USERNAME
