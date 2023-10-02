@@ -13,7 +13,7 @@ jobs:
   build-and-push:
     environment:
       DOCKER_IMAGE: tuananhpro/todoapp-docker
-      DOCKER_TAG: latest
+      DOCKER_TAG: arm64
     executor: docker/docker
     steps:
       - setup_remote_docker
