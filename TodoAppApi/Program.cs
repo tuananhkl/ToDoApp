@@ -1,27 +1,46 @@
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 using TodoAppApi.Context;
 
-var builder = WebApplication.CreateBuilder(args);
+var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+    builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("TodoDb"));
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseInMemoryDatabase("TodoDb"));
 
-var app = builder.Build();
+    builder.Logging.ClearProviders();
+    builder.Host.UseNLog();
+    
+    var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapControllers();
+    app.MapControllers();
 
-app.Run();
+    app.Run();
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex);
+    throw ex;
+}
+finally
+{
+    NLog.LogManager.Shutdown();
+}
