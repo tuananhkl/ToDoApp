@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Diagnostics;
 using System.Management;
+using Microsoft.AspNetCore.Mvc;
+
+namespace TodoAppApi.Controllers;
 
 [ApiController]
 [Route("api/systeminfo")]
@@ -16,7 +17,7 @@ public class SystemInfoController : ControllerBase
         systemInfo.TotalMemory = GetTotalMemory();
         systemInfo.TotalCpuCores = Environment.ProcessorCount;
 
-        return Ok(systemInfo);
+        return Ok(new {TotalMemory = systemInfo.TotalMemory.ToString("0.000"), TotalCpuCores = systemInfo.TotalCpuCores});
     }
 
     [HttpGet("app")]
@@ -27,19 +28,19 @@ public class SystemInfoController : ControllerBase
         // Get process information
         Process process = Process.GetCurrentProcess();
         appInfo.ProcessId = process.Id;
-        appInfo.WorkingSetMemory = process.WorkingSet64;
+        appInfo.WorkingSetMemory = (double)process.WorkingSet64 / (1024 * 1024);
         appInfo.CpuUsage = GetCpuUsage();
 
         return Ok(appInfo);
     }
 
-    private long GetTotalMemory()
+    private double GetTotalMemory()
     {
         using (var searcher = new ManagementObjectSearcher("SELECT TotalVisibleMemorySize FROM Win32_OperatingSystem"))
         {
             var query = searcher.Get();
             var item = query.Cast<ManagementObject>().First();
-            return Convert.ToInt64(item["TotalVisibleMemorySize"]) * 1024; // Convert to bytes
+            return (Convert.ToDouble(item["TotalVisibleMemorySize"]) * 1024) / (1024 * 1024 * 1024); // Convert to bytes
         }
     }
 
@@ -56,13 +57,13 @@ public class SystemInfoController : ControllerBase
 
 public class SystemInfo
 {
-    public long TotalMemory { get; set; }
+    public double TotalMemory { get; set; }
     public int TotalCpuCores { get; set; }
 }
 
 public class AppInfo
 {
     public int ProcessId { get; set; }
-    public long WorkingSetMemory { get; set; }
+    public double WorkingSetMemory { get; set; }
     public float CpuUsage { get; set; }
 }
