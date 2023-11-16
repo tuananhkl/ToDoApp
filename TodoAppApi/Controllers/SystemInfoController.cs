@@ -8,30 +8,54 @@ namespace TodoAppApi.Controllers;
 [Route("api/systeminfo")]
 public class SystemInfoController : ControllerBase
 {
+    private readonly ILogger<SystemInfoController> _logger;
+
+    public SystemInfoController(ILogger<SystemInfoController> logger)
+    {
+        _logger = logger;
+    }
+    
     [HttpGet("machine")]
     public ActionResult<SystemInfo> GetMachineInfo()
     {
-        SystemInfo systemInfo = new SystemInfo();
+        try
+        {
+            SystemInfo systemInfo = new SystemInfo();
 
-        // Get machine information
-        systemInfo.TotalMemory = GetTotalMemory();
-        systemInfo.TotalCpuCores = Environment.ProcessorCount;
+            // Get machine information
+            systemInfo.TotalMemory = GetTotalMemory();
+            systemInfo.TotalCpuCores = Environment.ProcessorCount;
+            return Ok(new {TotalMemory = systemInfo.TotalMemory.ToString("0.000"), TotalCpuCores = systemInfo.TotalCpuCores});
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500, "Internal Server Error");
+        }
 
-        return Ok(new {TotalMemory = systemInfo.TotalMemory.ToString("0.000"), TotalCpuCores = systemInfo.TotalCpuCores});
+        
     }
 
     [HttpGet("app")]
     public ActionResult<AppInfo> GetAppInfo()
     {
-        AppInfo appInfo = new AppInfo();
+        try
+        {
+            AppInfo appInfo = new AppInfo();
 
-        // Get process information
-        Process process = Process.GetCurrentProcess();
-        appInfo.ProcessId = process.Id;
-        appInfo.WorkingSetMemory = (double)process.WorkingSet64 / (1024 * 1024);
-        appInfo.CpuUsage = GetCpuUsage();
+            // Get process information
+            Process process = Process.GetCurrentProcess();
+            appInfo.ProcessId = process.Id;
+            appInfo.WorkingSetMemory = (double)process.WorkingSet64 / (1024 * 1024);
+            appInfo.CpuUsage = GetCpuUsage();
 
-        return Ok(appInfo);
+            return Ok(appInfo);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500, "Internal Server Error");
+        }
     }
 
     private double GetTotalMemory()
