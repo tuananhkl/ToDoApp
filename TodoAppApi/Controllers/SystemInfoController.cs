@@ -77,6 +77,106 @@ public class SystemInfoController : ControllerBase
             return Convert.ToSingle(item["PercentProcessorTime"]);
         }
     }
+
+    #region Linux
+
+    [HttpGet("cpuusage")]
+    public ActionResult<double> GetCpuUsageLinux()
+    {
+        try
+        {
+            double cpuUsage = GetCpuUsageValue();
+            return Ok(cpuUsage);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return BadRequest($"Failed to get CPU usage. Error: {ex.Message}");
+        }
+    }
+
+    [HttpGet("memoryusage")]
+    public ActionResult<double> GetMemoryUsageLinux()
+    {
+        try
+        {
+            double memoryUsage = GetMemoryUsageValue();
+            return Ok(memoryUsage);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return BadRequest($"Failed to get memory usage. Error: {ex.Message}");
+        }
+    }
+
+    private double GetCpuUsageValue()
+    {
+        using (var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "bash",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        })
+        {
+            process.Start();
+
+            process.StandardInput.WriteLine("top -b -n 1 | grep '%Cpu(s)' | awk '{print $2}'");
+            process.StandardInput.Close();
+
+            string result = process.StandardOutput.ReadToEnd().Trim();
+
+            process.WaitForExit();
+
+            if (double.TryParse(result, out double cpuUsage))
+            {
+                return cpuUsage;
+            }
+
+            return -1; // Error in parsing or retrieving CPU usage
+        }
+    }
+
+    private double GetMemoryUsageValue()
+    {
+        using (var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "bash",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        })
+        {
+            process.Start();
+
+            process.StandardInput.WriteLine("free -m | awk '/Mem:/ {print $3}'");
+            process.StandardInput.Close();
+
+            string result = process.StandardOutput.ReadToEnd().Trim();
+
+            process.WaitForExit();
+
+            if (double.TryParse(result, out double memoryUsage))
+            {
+                return memoryUsage;
+            }
+
+            return -1; // Error in parsing or retrieving memory usage
+        }
+    }
+
+    #endregion
 }
 
 public class SystemInfo
