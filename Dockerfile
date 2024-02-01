@@ -1,4 +1,4 @@
-# FROM --platform=linux/arm64 mcr.microsoft.com/dotnet/sdk:6.0 AS build
+# FROM --platform=linux/arm64 mcr.microsoft.com/dotnet/sdk:6.0 AS build 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 # FROM mcr.microsoft.com/dotnet/sdk:6.0-bookworm-slim-arm64v8 AS build
 WORKDIR /app
