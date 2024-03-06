@@ -22,8 +22,8 @@ try
     builder.Host.UseNLog();
     
     var app = builder.Build();
-    app.Urls.Add("http:192.168.31.178:4040"); // Ubuntu IP
-    app.Urls.Add("http:localhost:4040"); // Localhost
+    app.Urls.Add("http://192.168.31.178:4040"); // Ubuntu IP
+    app.Urls.Add("http://localhost:4040"); // Localhost
 
 // Configure the HTTP request pipeline.
     app.UseSwagger();
