@@ -17,8 +17,11 @@ try
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseInMemoryDatabase("TodoDb"));
+    // builder.Services.AddDbContext<AppDbContext>(options =>
+    //     options.UseInMemoryDatabase("TodoDb"));
+
+    builder.Services.AddDbContext<AppDbContext>(options => 
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
