@@ -1,10 +1,31 @@
-version: "3.8"
+version: '3.8'
+
 services:
-  mywebsite:
-    image: tuananhpro/todoapp-docker:latest
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    networks:
+      - my-app-network
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  web:
+    build: .
     ports:
       - "80:80"
-#      - "8081:443"
-#    environment:
-#      ASPNETCORE_URLS: "https://+;http://+"
-#      ASPNETCORE_HTTPS_PORT: "8081"
+    networks:
+      - my-app-network
+    depends_on:
+      - sqlserver
+    volumes:
+      - web-data:/app
+
+networks:
+  my-app-network:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
+  web-data:

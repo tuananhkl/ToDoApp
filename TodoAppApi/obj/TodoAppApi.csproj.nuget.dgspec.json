@@ -62,6 +62,10 @@
               "target": "Package",
               "version": "[6.0.22, )"
             },
+            "Microsoft.Extensions.Hosting.Systemd": {
+              "target": "Package",
+              "version": "[6.0.2-mauipre.1.22102.15, )"
+            },
             "NLog.Database": {
               "target": "Package",
               "version": "[5.2.5, )"
@@ -98,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.420\\RuntimeIdentifierGraph.json"
         }
       }
     }
